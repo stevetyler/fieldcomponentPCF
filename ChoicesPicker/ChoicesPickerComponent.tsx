@@ -31,7 +31,7 @@ export const ChoicesPickerComponent = React.memo((props: ChoicesPickerComponentP
                     key: item.Value.toString(),
                     value: item.Value,
                     text: item.Label,
-                    iconProps: { iconName: iconMapping[item.Value] },
+                    iconProps: { iconName: iconMapping[item.Value] }, // configuration needs to map to {"0":"ContactInfo","1":"Send","2":"Phone"}
                 } as IChoiceGroupOption;
             }),
         };
