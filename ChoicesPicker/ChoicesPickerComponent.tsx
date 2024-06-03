@@ -11,7 +11,8 @@ export interface ChoicesPickerComponentProps {
 }
 
 export const ChoicesPickerComponent = React.memo((props: ChoicesPickerComponentProps) => {
-    const { label, value, options, configuration, onChange } = props;
+    const { label, value, options, onChange } = props;
+    const configuration = JSON.stringify({"0":"ContactInfo","1":"Send","2":"Phone"});
     const valueKey = value != null ? value.toString() : undefined;
     const items = React.useMemo(() => {
         let iconMapping: Record<number, string> = {};
