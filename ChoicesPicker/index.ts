@@ -50,13 +50,14 @@ export class ChoicesPicker implements ComponentFramework.StandardControl<IInputs
 	 */
 	// Notice that you're pulling the label and options from context.parameters.value, and the value.raw provides the numeric choice selected or null if no value is selected.
 	public updateView(context: ComponentFramework.Context<IInputs>): void {
-		const { value, configuration } = context.parameters;
-		if (value && value.attributes && configuration) {
+		const { value } = context.parameters;
+		const configObject = {"0":"ContactInfo","1":"Send","2":"Phone"};
+		if (value && value.attributes && configObject) {
 			ReactDOM.render(
 				React.createElement(ChoicesPickerComponent, {
 					label: value.attributes.DisplayName,
 					options: value.attributes.Options,
-					configuration: configuration.raw,
+					configuration: JSON.stringify(configObject),
 					value: value.raw,
 					onChange: this.onChange,
 				}),
