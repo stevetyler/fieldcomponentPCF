@@ -52,6 +52,15 @@ export class ChoicesPicker implements ComponentFramework.StandardControl<IInputs
 	public updateView(context: ComponentFramework.Context<IInputs>): void {
 		const { value } = context.parameters;
 		const configObject = {"0":"ContactInfo","1":"Send","2":"Phone"};
+		
+		// must get masked and disabled flags so we don't update them by mistake 
+		let disabled = context.mode.isControlDisabled;
+		let masked = false;
+		if (value.security) {
+			disabled = disabled || !value.security.editable;
+			masked = !value.security.readable;
+		}
+
 		if (value && value.attributes && configObject) {
 			ReactDOM.render(
 				React.createElement(ChoicesPickerComponent, {
@@ -60,6 +69,8 @@ export class ChoicesPicker implements ComponentFramework.StandardControl<IInputs
 					configuration: JSON.stringify(configObject),
 					value: value.raw,
 					onChange: this.onChange,
+					disabled: disabled,
+					masked: masked
 				}),
 				this.rootContainer,
 			);
